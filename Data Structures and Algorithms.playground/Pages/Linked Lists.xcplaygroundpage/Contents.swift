@@ -1,4 +1,7 @@
-// Practicing linked lists
+import Foundation
+
+// Here i'm practicing linked lists.
+// The implementaion lays in the /Sources folder
 
 let node1 = Node(value: 1)
 let node2 = Node(value: 2)
@@ -62,3 +65,64 @@ print("Array containing last 3 elements: \(Array(list3.suffix(3)))")
 
 let sum = list3.reduce(0, +)
 print("Sum of all values: \(sum)")
+
+
+// Challenge 1: Print in reverse
+var list4 = LinkedList<Int>()
+for num in 1...5 {
+    list4.append(num)
+}
+print(list4)
+
+func reverse<T>(list: LinkedList<T>) {
+    for counter in 0...list.count {
+        if let nodeValue = list.node(at: list.count - counter)?.value {
+            print(nodeValue)
+        }
+    }
+}
+
+reverse(list: list4)
+
+// Challenge 2: Find the middle node
+print(list4)
+
+func findMiddleNode<T>(list: LinkedList<T>) -> Node<T>? {
+    let middleIndex = list.count / 2
+    return list.node(at: middleIndex)
+}
+
+if let middleNode = findMiddleNode(list: list4) {
+    print(middleNode.value)
+}
+
+// Challenge 3: Merge two lists
+var list5 = LinkedList<Int>()
+for num in 1...3 {
+    list5.append(num)
+}
+
+var list6 = LinkedList<Int>()
+for num in 4...6 {
+    list6.append(num)
+}
+
+func mergeLists<T>(listOne: LinkedList<T>, listTwo: LinkedList<T>) -> LinkedList<T> {
+    listOne.tail?.next = listTwo.head
+    return listOne
+}
+
+print(mergeLists(listOne: list5, listTwo: list6))
+print(list5) // First passed list IS the merged list
+
+// Doubly Linked List
+
+var doublyList = DoublyLinkedList<Int>()
+doublyList.push(1)
+doublyList.push(2)
+doublyList.push(3)
+doublyList.append(4)
+doublyList.append(5)
+doublyList.append(6)
+
+doublyList.node(at: 5)?.previous?.value
