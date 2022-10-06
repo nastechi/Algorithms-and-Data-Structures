@@ -1,5 +1,5 @@
 // Here i'm practicing stacks.
-// The implementaion lays in the /Sources folder
+// My implementaion lays in the /Sources folder
 
 var stack = Stack<Int>()
 stack.push(1)

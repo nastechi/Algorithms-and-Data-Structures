@@ -1,5 +1,5 @@
-// Here i'm practicing queues.
-// The implementaion lays in the /Sources folder
+// Here i'm practicing linked lists.
+// My implementaion lays in the /Sources folder
 
 import Foundation
 

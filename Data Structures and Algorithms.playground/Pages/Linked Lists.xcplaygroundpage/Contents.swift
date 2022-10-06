@@ -1,7 +1,7 @@
 import Foundation
 
 // Here i'm practicing linked lists.
-// The implementaion lays in the /Sources folder
+// My implementaion lays in the /Sources folder
 
 let node1 = Node(value: 1)
 let node2 = Node(value: 2)
