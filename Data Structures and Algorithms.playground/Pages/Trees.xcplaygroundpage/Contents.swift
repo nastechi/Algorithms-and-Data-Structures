@@ -46,21 +46,41 @@ func makeBeverageTree() -> TreeNode<String> {
 }
 
 let tree = makeBeverageTree()
-//tree.forEachDepthFirst { print($0.value) }
-//tree.forEachLevelOrder { print($0.value) }
+tree.forEachDepthFirst { print($0.value) }
+tree.forEachLevelOrder { print($0.value) }
 
 if let searchResult = tree.search("Ginger ale") {
-    //print("A \(searchResult.value) found in the menu")
+    print("A \(searchResult.value) found in the menu")
 }
+print()
 
-// Challenge 1: Print tree in a level order
-func printLevels(tree: TreeNode<String>) {
-    var queue = Queue<TreeNode<String>>()
+// Challenge 1: Print each level
+
+func printEachLevel<T>(for tree: TreeNode<T>) {
+    var queue = Queue<TreeNode<T>>()
     var nodesLeftInCurrentLevel = 0
     queue.enqueue(tree)
     
     while !queue.isEmpty {
+        nodesLeftInCurrentLevel = queue.array.count
+        
+        while nodesLeftInCurrentLevel > 0 {
+            guard let node = queue.dequeue() else { break }
+            print("\(node.value) ", terminator: "")
+            node.children.forEach { queue.enqueue($0) }
+            nodesLeftInCurrentLevel -= 1
+        }
+        print()
     }
 }
 
-printLevels(tree: tree)
+printEachLevel(for: tree)
+
+// Challenge 2: Parents
+// The add method in the TreeNode file was improved.
+
+var director = TreeNode<String>("Director")
+var teacher = TreeNode<String>("Teacher")
+director.add(teacher)
+
+print(teacher.parent?.value)
