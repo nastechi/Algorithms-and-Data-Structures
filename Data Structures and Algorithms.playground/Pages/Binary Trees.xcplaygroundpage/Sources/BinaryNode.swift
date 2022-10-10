@@ -30,3 +30,11 @@ extension BinaryNode: CustomStringConvertible {
         + diagram(for: node.leftChild, bottom + "| ", bottom + "└- ", bottom + " ")
     }
 }
+
+extension BinaryNode {
+    public func traverseInOrder(visit: (Element) -> Void) {
+        leftChild?.traverseInOrder(visit: visit)
+        visit(value)
+        rightChild?.traverseInOrder(visit: visit)
+    }
+}

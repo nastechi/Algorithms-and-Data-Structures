@@ -16,3 +16,5 @@ var tree: BinaryNode<Int> {
 }
 
 print(tree)
+
+tree.traverseInOrder { print($0) }
