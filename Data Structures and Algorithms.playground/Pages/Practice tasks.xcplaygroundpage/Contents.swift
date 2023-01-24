@@ -179,3 +179,82 @@ func areAnySameElements(inArray array: [Int], insideRange k: Int) -> Bool {
 
 print(areAnySameElements(inArray: [1, 2, 3, 4, 3], insideRange: 2))
 print(areAnySameElements(inArray: [1, 0, 1, 0, 1], insideRange: 1))
+
+
+// Given a sorted integer array nums, remove the duplicates in-place such that each element appears only once and return the new length.
+// Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+var nums = [1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5, 6, 6]
+
+func removeDuplicates(array: inout [Int]) -> Int {
+    
+    guard !array.isEmpty else { return 0 }
+    
+    var index = 1
+    while index < array.count {
+        if array[index] == array[index-1] {
+            array.remove(at: index)
+            continue
+        }
+        index += 1
+    }
+    return array.count
+}
+
+print(removeDuplicates(array: &nums))
+print(nums)
+
+
+// Given a sorted integer array nums2, remove the duplicates in-place such that each element appears at most twice and return the new length.
+// Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+var nums2 = [1, 1, 1, 1, 2, 2, 2, 3, 4, 4, 4]
+
+func removeMoreThanTwoDups(array: inout [Int]) -> Int {
+    
+    var index = 2
+    
+    while index < array.count {
+        if array[index] == array[index - 2] {
+            array.remove(at: index)
+            continue
+        }
+        index += 1
+    }
+    
+    return array.count
+}
+
+print(removeMoreThanTwoDups(array: &nums2), nums2)
+
+
+// Given a string s, find the length of the longest substring without repeating characters.
+
+func lengthOfLongestSubstring(s: String) -> Int {
+    guard !s.isEmpty else { return 0 }
+    
+    var currentMax = 1
+    var counter = 0
+    var tracker = [Character: Int]()
+    var index = 0
+    
+    while index < s.count {
+        if tracker[s[s.index(s.startIndex, offsetBy: index)]] == nil {
+            tracker[s[s.index(s.startIndex, offsetBy: index)]] = index
+            counter += 1
+            if counter > currentMax {
+                currentMax = counter
+            }
+            index += 1
+        } else {
+            counter = 1
+            index = tracker[s[s.index(s.startIndex, offsetBy: index)]]! + 1
+            tracker = [s[s.index(s.startIndex, offsetBy: index)]: index]
+            index += 1
+        }
+    }
+    return currentMax
+}
+
+print(lengthOfLongestSubstring(s: "dvdf"))
+print(lengthOfLongestSubstring(s: "pwwkew"))
