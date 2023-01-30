@@ -258,3 +258,25 @@ func lengthOfLongestSubstring(s: String) -> Int {
 
 print(lengthOfLongestSubstring(s: "dvdf"))
 print(lengthOfLongestSubstring(s: "pwwkew"))
+
+
+func lengthOfLongestSubstring2(s: String) -> Int {
+    guard !s.isEmpty else { return 0 }
+    var string = Array(s)
+    var max = 0
+    var tracker = [Character]()
+    var length = string.count
+    
+    for i in 0..<length {
+        let char = string[i]
+        if let same_char_index = tracker.firstIndex(of: char) {
+            tracker = Array(tracker[(same_char_index+1)..<tracker.count])
+        }
+        tracker.append(char)
+        max = tracker.count > max ? tracker.count : max
+    }
+    return max
+}
+
+print(lengthOfLongestSubstring2(s: "dvdf"))
+print(lengthOfLongestSubstring2(s: "pwwkew"))
